@@ -1,7 +1,7 @@
-import Friends from "@/assets/logo/friends.svg"
-import Memory from "@/assets/logo/memory.svg"
-import IconFriends from "@/assets/logo/icon_friends.svg"
-import IconMemory from "@/assets/logo/icon_memory.svg"
+import Friends from "@/assets/logo/friends.svg";
+import Memory from "@/assets/logo/memory.svg";
+import IconFriends from "@/assets/logo/icon_friends.svg";
+import IconMemory from "@/assets/logo/icon_memory.svg";
 
 export const projects = [
   {
@@ -19,5 +19,23 @@ export const projects = [
     link: "/memory",
     image: Memory,
     icon: IconMemory,
+  },
+];
+
+export const account = [
+  {
+    image: IconMemory,
+    name: "Stevenbub Wongso",
+    description: "Male, 19th, Student, JakartaMale, 19th, Student, JakartaMale, 19th, Student, JakartaMale, 19th, Student, Jakarta",
+  },
+  {
+    image: IconMemory,
+    name: "Stevenbub Wongso",
+    description: "Male, 19th, Student, Jakarta",
+  },
+  {
+    image: IconMemory,
+    name: "Stevenbub Wongso",
+    description: "Male, 19th, Student, Jakarta",
   },
 ];

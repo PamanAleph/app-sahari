@@ -72,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} font-sora antialiased bg-[#1E1E1E]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} font-sora antialiased bg-[#070707]`}
       >
         {" "}
         {children}
