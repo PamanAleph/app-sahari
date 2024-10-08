@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Navbar from "@/components/Navbar";
 import "./globals.css";
+import { Sora } from "next/font/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,8 +14,14 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
+});
+
 export const metadata: Metadata = {
-  title: "Sahari - Your Daily Companion | Solutions for Loneliness and Memories",
+  title:
+    "Sahari - Your Daily Companion | Solutions for Loneliness and Memories",
   description:
     "Sahari is an innovative platform offering solutions for individuals feeling lonely or struggling to socialize. Connect with professional talents for social activities or relive memories with loved ones through an AI chatbot.",
   keywords: [
@@ -34,10 +40,11 @@ export const metadata: Metadata = {
     "interactive AI chatbot",
   ],
   openGraph: {
-    title: "Sahari - Your Daily Companion | Solutions for Loneliness & Memories",
+    title:
+      "Sahari - Your Daily Companion | Solutions for Loneliness & Memories",
     description:
       "Find a daily companion for social activities or relive cherished memories with loved ones through an AI chatbot. Sahari helps create meaningful connections.",
-    url: "https://sahari.com",
+    url: "https://sahari.id",
     type: "website",
     images: [
       {
@@ -57,7 +64,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,9 +72,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}antialiased bg-[#1E1E1E]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} font-sora antialiased bg-[#1E1E1E]`}
       >
-        <Navbar />
+        {" "}
         {children}
       </body>
     </html>

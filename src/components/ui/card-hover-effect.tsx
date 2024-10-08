@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { Modal, ModalTrigger } from "./animated-modal";
 
 export const HoverEffect = ({
   items,
@@ -14,6 +15,7 @@ export const HoverEffect = ({
     description: string;
     link: string;
     image: string;
+    icon:string;
   }[];
   className?: string;
 }) => {
@@ -42,19 +44,30 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
-          <Card className="py-8">
+          <Card className="py-8 bg-gradient-to-b from-[#1F1F1F] to-transparent">
             <CardImage
               src={item.image}
               alt={item.title}
               className="hidden md:flex justify-center items-center pointer-events-none"
             />
-            <CardTitle className="text-center text-2xl py-4">{item.title}</CardTitle>
+            <CardTitle className="text-center text-2xl py-4">
+              {item.title}
+            </CardTitle>
             <CardDescription className="text-center text-md max-w-lg mx-auto">
               {item.description}
             </CardDescription>
-              <Link href={item.link} className="flex justify-center mt-4">
-                <CardButton className="text-center text-xl">Start</CardButton>
-              </Link>
+            <Link href={item.link} className="flex justify-center mt-4">
+              <Modal>
+                <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
+                  <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
+                    Start
+                  </span>
+                  <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
+                    <Image src={item.icon} alt={item.title} width={18} height={18}/>
+                  </div>
+                </ModalTrigger>{" "}
+              </Modal>
+            </Link>
           </Card>
         </motion.div>
       ))}
@@ -86,13 +99,47 @@ export const Card = ({
 export const CardButton = ({
   className,
   children,
+  iconSrc, // Tambahkan prop untuk sumber gambar ikon
+  iconAlt, // Tambahkan prop untuk alt text gambar ikon
 }: {
   className?: string;
   children: React.ReactNode;
+  iconSrc: string; // Sumber gambar ikon
+  iconAlt: string; // Alt text untuk gambar ikon
 }) => {
   return (
-    <button className={cn(" text-white rounded-xl px-6 py-3 mt-4", className)}>
-      {children}
+    <button
+      className={cn(
+        "relative text-white rounded-xl px-12 py-3 mt-4 flex justify-center items-center overflow-hidden group", // Tambahkan group untuk efek hover
+        className
+      )}
+    >
+      {/* Teks element */}
+      <span className="transition-transform duration-300 transform group-hover:translate-x-full absolute">
+        {children}
+      </span>
+
+      {/* Ikon element */}
+      <span className="transition-transform duration-300 transform opacity-0 group-hover:opacity-100 absolute">
+        <Image
+          src={iconSrc} // Path ke ikon
+          alt="Icon"
+          width={24} // Sesuaikan ukuran ikon
+          height={24}
+          className="w-6 h-6" // Mengatur ukuran agar responsif
+        />
+      </span>
+
+      {/* Membuat ikon berada di tengah tombol */}
+      <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <Image
+          src={iconSrc} // Ganti dengan path ikonmu
+          alt={iconAlt}
+          width={24} // Sesuaikan ukuran ikon
+          height={24}
+          className="w-6 h-6"
+        />
+      </span>
     </button>
   );
 };
