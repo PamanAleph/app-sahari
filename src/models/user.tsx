@@ -4,7 +4,9 @@ interface User {
     banner: string;
     age: number;
     job: string;
-    location: string;
+    city: string;
+    province: string;
+    nationality: string;
     description: string;
     zodiak: string;
     interested: string[];
