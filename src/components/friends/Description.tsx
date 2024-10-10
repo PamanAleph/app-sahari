@@ -9,7 +9,7 @@ interface DescriptionProps {
 
 export default function Description({ user }:DescriptionProps) {
   return (
-    <section className="text-[#8C8C8C] flex flex-col space-y-2">
+    <section className="text-[#8C8C8C] flex flex-col space-y-2 max-h-[70vh] overflow-y-auto">
       {/* banner */}
       <Image src={user.banner} alt="Banner" width={1000} height={500} />
       

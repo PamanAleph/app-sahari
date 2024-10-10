@@ -1,4 +1,5 @@
 interface User {
+    id: number;
     image: string;
     name: string;
     banner: string;

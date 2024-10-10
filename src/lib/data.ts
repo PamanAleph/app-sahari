@@ -25,6 +25,7 @@ export const projects = [
 
 export const userData = [
   {
+    id: 1,
     image: IconMemory,
     name: "Evelyn Smith",
     banner: Banner.src,
@@ -33,12 +34,13 @@ export const userData = [
     city: "Jakarta",
     province: "DKI Jakarta",
     nationality: "Indonesia",
-    description: "Evelyn is a creative graphic designer who is passionate about transforming ideas into stunning visuals. With a strong background in both print and digital design, she loves collaborating on innovative projects that challenge her skills. She enjoys exploring new design trends and techniques to stay ahead in the industry. When she's not designing, you can find her visiting art galleries, attending workshops, or working on personal projects that allow her to express her creativity.",
+    description: "Evelyn is a creative graphic designer who is passionate about transforming ideas into stunning visuals. With a strong background in both print and digital design, she loves collaborating on innovative projects that challenge her skills. She enjoys exploring new design trends and techniques to stay ahead in the industry. When she's not designing, you can find her visiting art galleries, attending workshops, or working on personal projects that allow her to express her creativity.Evelyn is a creative graphic designer who is passionate about transforming ideas into stunning visuals. With a strong background in both print and digital design, she loves collaborating on innovative projects that challenge her skills. She enjoys exploring new design trends and techniques to stay ahead in the industry. When she's not designing, you can find her visiting art galleries, attending workshops, or working on personal projects that allow her to express her creativity.",
     zodiak: "Libra",
     interested: ["Art", "Music", "Travel"],
     love_language: ["Quality Time", "Acts of Service"],
   },
   {
+    id: 2,
     image: IconMemory,
     name: "Andreas Kurniawan",
     banner: Banner.src,
@@ -53,6 +55,7 @@ export const userData = [
     love_language: ["Words of Affirmation", "Physical Touch"],
   },
   {
+    id: 3,
     image: IconMemory,
     name: "Sari Pratiwi",
     banner: Banner.src,
@@ -67,6 +70,7 @@ export const userData = [
     love_language: ["Acts of Service", "Receiving Gifts"],
   },
   {
+    id: 4,
     image: IconMemory,
     name: "Rudi Hartono",
     banner: Banner.src,
@@ -81,6 +85,7 @@ export const userData = [
     love_language: ["Quality Time", "Words of Affirmation"],
   },
   {
+    id: 5,
     image: IconMemory,
     name: "Lina Setiawati",
     banner: Banner.src,
@@ -95,6 +100,7 @@ export const userData = [
     love_language: ["Physical Touch", "Acts of Service"],
   },
   {
+    id: 6,
     image: IconMemory,
     name: "Budi Santoso",
     banner: Banner.src,
@@ -109,6 +115,7 @@ export const userData = [
     love_language: ["Receiving Gifts", "Quality Time"],
   },
   {
+    id: 7,
     image: IconMemory,
     name: "Nina Agustin",
     banner: Banner.src,
@@ -123,6 +130,7 @@ export const userData = [
     love_language: ["Acts of Service", "Words of Affirmation"],
   },
   {
+    id: 8,
     image: IconMemory,
     name: "Taufik Rahman",
     banner: Banner.src,
@@ -137,6 +145,7 @@ export const userData = [
     love_language: ["Quality Time", "Receiving Gifts"],
   },
   {
+    id: 9,
     image: IconMemory,
     name: "Dewi Lestari",
     banner: Banner.src,
@@ -151,6 +160,7 @@ export const userData = [
     love_language: ["Words of Affirmation", "Acts of Service"],
   },
   {
+    id: 10,
     image: IconMemory,
     name: "Rina Melati",
     banner: Banner.src,
