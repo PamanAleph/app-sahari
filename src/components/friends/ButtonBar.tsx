@@ -1,18 +1,46 @@
+import User from "@/models/user";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import React from "react";
 
-export default function ButtonBar() {
-  return (
-    <section className="flex items-center space-x-[5vw] border text-[1rem] text-[#808080]">
-      <button className="border px-4 py-2 rounded-3xl">Prev</button>
+interface ButtonBarProps {
+  user: User;
+}
 
-      <div className=" border space-x-4 rounded-3xl p-2">
-        <button className="border px-4 py-2 rounded-3xl">Online Date</button>
-        <button className="border px-4 py-2 rounded-3xl text-white">
-          Say Hi👏
-        </button>
-        <button className="border px-4 py-2 rounded-3xl">Offline Date</button>
+export default function ButtonBar({ user }: ButtonBarProps) {
+  return (
+    <section className="flex items-center justify-between px-[2vw] border border-[#0F0F0F] rounded-xl text-[1.5vw] text-[#808080]">
+      {/* Prev Button */}
+      <button className="border px-[2vw] py-[1.5vh] rounded-[2vw] text-[1vw]">
+        <div className="flex">
+          <ArrowLeftIcon color="white"/>
+          <p>Prev</p>
+        </div>
+      </button>
+
+      {/* Links */}
+      <div className="flex space-x-[2vw] rounded-[2vw] p-[1vw]">
+        <Link href={`friends/book/online/${user.id}`}>
+          <button className="border px-[2vw] py-[1.5vh] rounded-[2vw] text-[1vw]">
+            Online Date
+          </button>
+        </Link>
+        <Link href={`friends/chat/${user.id}`}>
+          <button className="border px-[2vw] py-[1.5vh] rounded-[2vw] text-white text-[1vw]">
+            Say Hi👏
+          </button>
+        </Link>
+        <Link href={`friends/book/offline/${user.id}`}>
+          <button className="border px-[2vw] py-[1.5vh] rounded-[2vw] text-[1vw]">
+            Offline Date
+          </button>
+        </Link>
       </div>
-      <button className="border px-4 py-2 rounded-3xl">Next</button>
+
+      {/* Next Button */}
+      <button className="border px-[2vw] py-[1.5vh] rounded-[2vw] text-[1vw]">
+        Next
+      </button>
     </section>
   );
 }

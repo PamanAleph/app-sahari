@@ -68,9 +68,8 @@ export default function Page() {
           <FloatingNavbar items={[floatingData]} desktopClassName="w-[20vw]" />
         </div>
         <div className="w-2/3 flex items-center justify-center">
-          {/* Centering ButtonBar */}
           <div className="flex justify-center items-center w-full">
-            <ButtonBar />
+            <ButtonBar user={selectedUser}/>
           </div>
         </div>
       </div>
