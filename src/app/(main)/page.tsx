@@ -10,7 +10,7 @@ export default function page() {
       <Navbar />
       <BackgroundBeamsWithCollision className="absolute:none md:absolute inset-0">
         <div className="container">
-          <HoverEffect items={projects} className="pb-8 pt-6 md:pt-36" />
+          <HoverEffect items={projects} className="pb-8 pt-6 md:pt-[25vh]" />
         </div>
       </BackgroundBeamsWithCollision>
     </section>
