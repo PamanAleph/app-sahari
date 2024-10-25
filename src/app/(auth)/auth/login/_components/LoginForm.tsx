@@ -47,7 +47,7 @@ export default function LoginForm() {
               setTimeout(() => {
                 router.push("/"); 
               }, 2000);
-
+  
               return "Login Successful!";
             },
           },
@@ -57,8 +57,8 @@ export default function LoginForm() {
     } catch (error) {
       console.error("Login Error:", error);
     }
-  };
-
+  };  
+  
   return (
     <section>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />

@@ -155,6 +155,7 @@ export default function RegisterForm() {
                             type={field.type}
                             placeholder={field.placeholder}
                             {...formField}
+                            className="rounded-xl"
                           />
                         </FormControl>
                         <FormMessage />
@@ -171,13 +172,13 @@ export default function RegisterForm() {
                       onValueChange={(value) => handleCountryCodeChange(value)}
                       defaultValue={selectedCountryCode}
                     >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select" />
+                      <SelectTrigger className="rounded-xl">
+                        <SelectValue placeholder="Select" className="rounded-xl"/>
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="rounded-xl">
                         {countryCodes.map((country) => (
-                          <SelectItem key={country.code} value={country.code}>
-                            <div className="flex items-center gap-2">
+                          <SelectItem key={country.code} value={country.code} className="rounded-xl">
+                            <div className="flex items-center gap-2 rounded-xl">
                               <span>{country.flag}</span>
                               <span>(+{country.code})</span>
                             </div>
@@ -199,6 +200,7 @@ export default function RegisterForm() {
                             type="text"
                             placeholder={`${selectedCountryCode}81234567890`}
                             {...field}
+                            className="rounded-xl"
                           />
                         </FormControl>
                         <FormMessage />
@@ -214,7 +216,12 @@ export default function RegisterForm() {
                     <FormItem>
                       <FormLabel>Username</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder="user123" {...field} />
+                        <Input
+                          type="text"
+                          placeholder="user123"
+                          {...field}
+                          className="rounded-xl"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -265,6 +272,7 @@ export default function RegisterForm() {
                             type={field.type}
                             placeholder={field.placeholder}
                             {...formField}
+                            className="rounded-xl"
                           />
                         </FormControl>
                         <FormMessage />
