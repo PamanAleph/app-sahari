@@ -1,28 +1,24 @@
 import { UUID } from "crypto";
 
 interface LocationProps{
-    id: UUID;
-    name: string | null;
-    address: string | null;
-}
-
-interface RatingProps{
-    average: number;
-    punctuality:number;
-    communication: number
-    service_quality:number;
+    address: string;
+    subdistrict: string;
+    district: string;
+    city: string;
+    province: string;
+    country: string;
 }
 
 interface TalentProps{
+    photo_profile: string ;
     talent_id: UUID;
     talent_name: string;
-    description: string;
-    location: LocationProps;
-    rating: RatingProps;
+    user_id: UUID;
+    location: LocationProps[];
+    date_of_birth: Date;
     occupation: string | null; 
-    interested:string | null;
-    love_language: string[]
     createdAt: Date;
+    gender: string
 }
 
 export default TalentProps
