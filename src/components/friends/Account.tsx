@@ -2,6 +2,8 @@ import Image from "next/image";
 import React from "react";
 import TalentProps from "@/models/talent";
 import { calculateAge } from "@/utils/age";
+import DefaultAccount from "@/assets/logo/icon.svg"
+
 
 interface AccountProps {
   talent: TalentProps;
@@ -15,7 +17,7 @@ export default function Account({ talent, onClick }: AccountProps) {
       onClick={onClick}
     >
       <Image
-        src={talent.photo_profile || "/default-profile.png"}
+        src={talent.photo_profile || DefaultAccount}
         alt={talent.talent_name}
         width={40}
         height={40}

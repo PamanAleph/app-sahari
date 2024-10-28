@@ -4,8 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
-
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,7 +18,7 @@ import {
 import { Login } from "@/services/api/auth"; 
 
 const formSchema = z.object({
-  username: z.string().min(1,{ message: "Invalid account address." }),
+  username: z.string().min(1, { message: "Invalid account address." }),
   password: z.string().min(6, { message: "Password must be at least 6 characters." }),
 });
 
@@ -27,6 +26,8 @@ type FormSchemaType = z.infer<typeof formSchema>;
 
 export default function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+const redirectUrl = searchParams.get("redirect");
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -38,16 +39,19 @@ export default function LoginForm() {
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     try {
-      toast.promise(
-        Login(data), 
+      await toast.promise(
+        Login(data),
         {
           pending: "Logging in...",
           success: {
             render() {
               setTimeout(() => {
-                router.push("/"); 
+                if (redirectUrl) {
+                  router.push(decodeURIComponent(redirectUrl));
+                } else {
+                  router.back();
+                }
               }, 2000);
-  
               return "Login Successful!";
             },
           },
@@ -57,7 +61,7 @@ export default function LoginForm() {
     } catch (error) {
       console.error("Login Error:", error);
     }
-  };  
+  };
   
   return (
     <section>
