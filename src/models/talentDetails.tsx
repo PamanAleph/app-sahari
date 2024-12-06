@@ -1,4 +1,4 @@
-import { UUID } from "crypto"; // Use this if supported; otherwise, use string
+import { UUID } from "crypto"; 
 
 interface LocationProps {
   address: string | null;
@@ -23,6 +23,7 @@ interface TalentDetailsProps {
   date_of_birth: Date;     
   gender: "Male" | "Female";
   photo_profile: string ;
+  banner: string;
   description: string;
   location: LocationProps;
   open_location?: string | null; 

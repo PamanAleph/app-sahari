@@ -13,17 +13,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Register } from "@/services/api/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -47,17 +41,8 @@ const formSchema = z.object({
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
-const countryCodes = [
-  { code: "62", flag: "🇮🇩", name: "Indonesia" },
-  { code: "60", flag: "🇲🇾", name: "Malaysia" },
-  { code: "91", flag: "🇮🇳", name: "India" },
-  { code: "1", flag: "🇺🇸", name: "United States" },
-  { code: "44", flag: "🇬🇧", name: "United Kingdom" },
-];
-
 export default function RegisterForm() {
   const [step, setStep] = useState(1);
-  const [selectedCountryCode, setSelectedCountryCode] = useState("62");
   const router = useRouter();
 
   const form = useForm<FormSchemaType>({
@@ -74,10 +59,7 @@ export default function RegisterForm() {
   });
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
-    const fullPhoneNumber = selectedCountryCode + data.phone_number;
-    const formData = { ...data, phone_number: fullPhoneNumber };
-
-    toast.promise(Register(formData), {
+    toast.promise(Register(data), {
       pending: "Registering...",
       success: {
         render() {
@@ -106,10 +88,6 @@ export default function RegisterForm() {
 
   const prevStep = () => {
     setStep(1);
-  };
-
-  const handleCountryCodeChange = (code: string) => {
-    setSelectedCountryCode(code);
   };
 
   return (
@@ -142,6 +120,18 @@ export default function RegisterForm() {
                     type: "password",
                     placeholder: "********",
                   },
+                  {
+                    label: "Phone Number",
+                    name: "phone_number",
+                    type: "text",
+                    placeholder: "81234567890",
+                  },
+                  {
+                    label: "Username",
+                    name: "username",
+                    type: "text",
+                    placeholder: "user123",
+                  },
                 ].map((field) => (
                   <FormField
                     key={field.name}
@@ -163,71 +153,6 @@ export default function RegisterForm() {
                     )}
                   />
                 ))}
-
-                <div className="flex gap-2">
-                  {/* Country Code Selector */}
-                  <div className="w-1/2">
-                    <FormLabel>Country Code</FormLabel>
-                    <Select
-                      onValueChange={(value) => handleCountryCodeChange(value)}
-                      defaultValue={selectedCountryCode}
-                    >
-                      <SelectTrigger className="rounded-xl">
-                        <SelectValue placeholder="Select" className="rounded-xl"/>
-                      </SelectTrigger>
-                      <SelectContent className="rounded-xl">
-                        {countryCodes.map((country) => (
-                          <SelectItem key={country.code} value={country.code} className="rounded-xl">
-                            <div className="flex items-center gap-2 rounded-xl">
-                              <span>{country.flag}</span>
-                              <span>(+{country.code})</span>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Phone Number Input */}
-                  <FormField
-                    control={form.control}
-                    name="phone_number"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>Phone Number</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder={`${selectedCountryCode}81234567890`}
-                            {...field}
-                            className="rounded-xl"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Username</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          placeholder="user123"
-                          {...field}
-                          className="rounded-xl"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
                 <Button
                   type="button"
                   onClick={nextStep}
@@ -298,6 +223,11 @@ export default function RegisterForm() {
               </>
             )}
           </form>
+          <Link href="/auth/login" className="flex justify-center">
+            <Button className="block mt-4 text-center text-white/70 hover:text-white">
+              Already have an account? Login here.
+            </Button>
+          </Link>
         </Form>
       </div>
     </section>

@@ -76,7 +76,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} font-sora antialiased bg-[#070707]`}
       >
         {" "}
-        <NextTopLoader/>
+        <NextTopLoader showSpinner={false}/>
         {children}
       </body>
     </html>

@@ -5,9 +5,6 @@ import Cookies from "js-cookie";
 export const Register = async (user: UserAuthProps) => {
   const response = await fetch(`${API_AUTH}/register`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(user),
   });
 

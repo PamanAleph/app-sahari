@@ -15,11 +15,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Login } from "@/services/api/auth"; 
+import { Login } from "@/services/api/auth";
+import Link from "next/link";
 
 const formSchema = z.object({
   username: z.string().min(1, { message: "Invalid account address." }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters." }),
 });
 
 type FormSchemaType = z.infer<typeof formSchema>;
@@ -27,7 +30,7 @@ type FormSchemaType = z.infer<typeof formSchema>;
 export default function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-const redirectUrl = searchParams.get("redirect");
+  const redirectUrl = searchParams.get("redirect");
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -39,36 +42,35 @@ const redirectUrl = searchParams.get("redirect");
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     try {
-      await toast.promise(
-        Login(data),
-        {
-          pending: "Logging in...",
-          success: {
-            render() {
-              setTimeout(() => {
-                if (redirectUrl) {
-                  router.push(decodeURIComponent(redirectUrl));
-                } else {
-                  router.back();
-                }
-              }, 2000);
-              return "Login Successful!";
-            },
+      await toast.promise(Login(data), {
+        pending: "Logging in...",
+        success: {
+          render() {
+            setTimeout(() => {
+              if (redirectUrl) {
+                router.push(decodeURIComponent(redirectUrl));
+              } else {
+                router.back();
+              }
+            }, 2000);
+            return "Login Successful!";
           },
-          error: "Login Failed!",
-        }
-      );
+        },
+        error: "Login Failed!",
+      });
     } catch (error) {
       console.error("Login Error:", error);
     }
   };
-  
+
   return (
     <section>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <div className="max-w-[30vw] mx-auto p-6 rounded-lg bg-white/30 backdrop-blur-md shadow-lg">
         <div className="py-2 space-y-2">
-          <h2 className="text-2xl font-bold text-black">Login to Your Account!</h2>
+          <h2 className="text-2xl font-bold text-black">
+            Login to Your Account!
+          </h2>
           <p className="text-justify text-sm text-white/80">
             Enter your credentials to access your account.
           </p>
@@ -115,6 +117,11 @@ const redirectUrl = searchParams.get("redirect");
               Login
             </Button>
           </form>
+          <Link href="/auth/register" className="flex justify-center">
+            <Button className="block mt-4 text-center text-white/70 hover:text-white">
+              Don&apos; t have an account? Register Now!
+            </Button>
+          </Link>
         </Form>
       </div>
     </section>

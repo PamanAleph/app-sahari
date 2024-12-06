@@ -35,7 +35,7 @@ export default function Page() {
   }, []);
 
   const handleAccountClick = async (talent: TalentProps) => {
-    setDescriptionLoading(true); 
+    setDescriptionLoading(true);
     try {
       const response = await getTalentByName(talent.talent_name);
       if (response && response.data) {
@@ -49,7 +49,6 @@ export default function Page() {
       setDescriptionLoading(false);
     }
   };
-
 
   return (
     <section className="container">
@@ -103,7 +102,7 @@ export default function Page() {
           ) : selectedUser ? (
             <Description talent={selectedUser} />
           ) : (
-            <DescriptionNoData/>
+            <DescriptionNoData />
           )}
         </div>
       </div>
