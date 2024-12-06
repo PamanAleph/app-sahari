@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Hero from "@/assets/background/Hero.png";
-import LoginForm from "@/components/auth/LoginForm";
+import LoginForm from "@/components/auth/login/LoginForm";
 
 export default function page() {
   return (

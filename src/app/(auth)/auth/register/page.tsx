@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Hero from "@/assets/background/Hero.png";
-import RegisterForm from "@/components/auth/RegisterForm";
+import RegisterForm from "@/components/auth/register/RegisterForm";
 
 export default function page() {
   return (
