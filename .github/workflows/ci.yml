@@ -65,7 +65,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ GITHUB_TOKEN.ACCESS_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract Version or Generate Tag
         id: extract_version
