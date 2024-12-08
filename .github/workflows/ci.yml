@@ -18,7 +18,7 @@ permissions:
 env:
   IMAGE_NAME: sahari-staging
   REGISTRY: ghcr.io 
-  REPO_OWNER: PamanAleph
+  REPO_OWNER: pamanaleph
 
 jobs:
   semantic-release:
@@ -65,7 +65,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN}}
 
       - name: Extract Version or Generate Tag
         id: extract_version
