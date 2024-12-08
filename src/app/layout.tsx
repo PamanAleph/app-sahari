@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Sora } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import { PublicEnvScript } from 'next-runtime-env';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -72,11 +73,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      <PublicEnvScript />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} font-sora antialiased bg-[#070707]`}
       >
         {" "}
-        <NextTopLoader showSpinner={false}/>
+        <NextTopLoader showSpinner={false} />
         {children}
       </body>
     </html>

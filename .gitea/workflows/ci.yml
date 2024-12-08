@@ -1,0 +1,92 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+      - development
+      - release/*
+      - hotfix/*
+      - beta/*
+      - feature/*
+
+permissions:
+  contents: write
+  actions: write
+  packages: write
+
+env:
+  IMAGE_NAME: sahari-staging
+  REGISTRY: ghcr.io 
+  REPO_OWNER: PamanAleph
+
+jobs:
+  semantic-release:
+    if: startsWith(github.ref, 'refs/heads/main') ||
+      startsWith(github.ref, 'refs/heads/release/') ||
+      startsWith(github.ref, 'refs/heads/beta/')
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Semantic Release
+        env:
+          GIT_AUTHOR_NAME: GitHub CI
+          GIT_AUTHOR_EMAIL: github@example.com
+          GIT_HEAD: ${{ github.head_sha }}
+          GIT_REF: ${{ github.ref }}
+          GIT_COMMITTER_NAME: GitHub CI
+          GIT_COMMITTER_EMAIL: github@example.com
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log In to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Extract Version or Generate Tag
+        id: extract_version
+        run: |
+          if [[ ${{ github.ref }} == refs/heads/feature/* ]]; then
+            VERSION="dev-$(date +%s)"
+          elif [[ ${{ github.ref }} == refs/heads/development ]]; then
+            VERSION="alpha-$(date +%s)"
+          elif [[ ${{ github.ref }} == refs/heads/beta/* ]]; then
+            VERSION="beta-$(date +%s)"
+          elif [[ ${{ github.ref }} == refs/heads/release/* ]]; then
+            VERSION="rc-$(date +%s)"
+          else
+            VERSION=$(node -p "require('./package.json').version")
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Build and Push Docker Image
+        run: |
+          docker buildx build \
+            --file ./docker/production/Dockerfile \
+            --tag ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }} \
+            --tag ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/${{ env.IMAGE_NAME }}:latest \
+            --push --cache-from type=gha --cache-to type=gha,mode=max .
