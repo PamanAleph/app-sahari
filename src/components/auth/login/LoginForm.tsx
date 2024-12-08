@@ -66,7 +66,7 @@ export default function LoginForm() {
   return (
     <section>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
-      <div className="max-w-[30vw] mx-auto p-6 rounded-lg bg-white/30 backdrop-blur-md shadow-lg">
+      <div className="w-[30vw] mx-auto p-6 rounded-lg bg-white/30 backdrop-blur-md shadow-lg">
         <div className="py-2 space-y-2">
           <h2 className="text-2xl font-bold text-black">
             Login to Your Account!
@@ -117,11 +117,18 @@ export default function LoginForm() {
               Login
             </Button>
           </form>
-          <Link href="/auth/register" className="flex justify-center">
-            <Button className="block mt-4 text-center text-white/70 hover:text-white">
-              Don&apos; t have an account? Register Now!
-            </Button>
-          </Link>
+          <div className="flex flex-col">
+            <Link href="/auth/register" className="flex justify-center">
+              <Button className="block mt-4 text-center text-white/70 hover:text-white">
+                Don&apos; t have an account? Register Now!
+              </Button>
+            </Link>
+            <Link href="/auth/forgot-password" className="flex justify-center">
+              <Button className="block text-center text-white/70 hover:text-white">
+                Forgot Password?
+              </Button>
+            </Link>
+          </div>
         </Form>
       </div>
     </section>
