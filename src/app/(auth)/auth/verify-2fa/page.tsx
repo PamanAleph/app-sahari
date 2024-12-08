@@ -1,7 +1,7 @@
-import Image from "next/image";
-import React from "react";
+import MFAForm from '@/components/auth/mfa/MFAForm'
+import Image from 'next/image'
+import React from 'react'
 import Hero from "@/assets/background/Hero.png";
-import RegisterForm from "@/components/auth/register/RegisterForm";
 
 export default function page() {
   return (
@@ -55,10 +55,10 @@ export default function page() {
             className="absolute inset-0 h-full w-full object-cover z-0"
           />
           <div className="relative z-10 flex items-center justify-center h-full p-6">
-            <RegisterForm />
+            <MFAForm />
           </div>
         </aside>
       </div>
     </section>
-  );
+  )
 }

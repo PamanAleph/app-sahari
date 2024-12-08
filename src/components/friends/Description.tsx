@@ -4,25 +4,34 @@ import Pointer from "@/assets/talents/point.svg";
 import TalentDetailsProps from "@/models/talentDetails";
 import { calculateAge } from "@/utils/age";
 import { getZodiacSign } from "@/utils/zodiac";
+import DefaultBanner from "@/assets/background/Sahari-Memory.svg";
 
 interface DescriptionProps {
   talent: TalentDetailsProps;
 }
 
 export default function Description({ talent }: DescriptionProps) {
-  // Parse the date_of_birth for correct age and zodiac calculation
   const dateOfBirth = new Date(talent.date_of_birth);
 
   return (
     <section className="text-[#8C8C8C] flex flex-col space-y-2 max-h-[70vh] overflow-y-auto">
       {/* banner */}
-      <Image
-        src={talent.photo_profile || Pointer}
-        alt={talent.talent_name || "Default Image"}
-        width={40}
-        height={40}
-        className="rounded-full h-14 w-14 object-fit"
-      />
+      <div className="relative">
+        <Image
+          src={`/${talent.banner}` || DefaultBanner}
+          alt="Default Banner"
+          width={1920}
+          height={1080}
+          className="relative h-[25vh] w-full object-cover"
+        />
+        <Image
+          src={`/${talent.photo_profile}` || Pointer}
+          alt={talent.talent_name || "Default Image"}
+          width={40}
+          height={40}
+          className="absolute top-1/2 left-5 transform -translate-y-1/2 h-[5.5rem] w-[5.5rem] object-cover aspect-square border-2 border-white shadow-lg"
+        />
+      </div>
 
       {/* name */}
       <div className="flex items-center space-x-6">
@@ -30,12 +39,16 @@ export default function Description({ talent }: DescriptionProps) {
         <div className="flex items-center space-x-4">
           <div className="bg-gradient-to-r from-[#FF0004]/20 to-transparent px-4 py-1 rounded-3xl">
             <h3 className="text-[#BB3033] font-[600] text-[13px]">
-              {isNaN(dateOfBirth.getTime()) ? "Unknown Age" : calculateAge(dateOfBirth)}
+              {isNaN(dateOfBirth.getTime())
+                ? "Unknown Age"
+                : calculateAge(dateOfBirth)}
             </h3>
           </div>
           <div className="bg-gradient-to-r from-[#FF0004]/20 to-transparent px-4 py-1 rounded-3xl">
             <h3 className="text-[#BB3033] font-[600] text-[13px]">
-              {isNaN(dateOfBirth.getTime()) ? "Unknown Zodiac" : getZodiacSign(dateOfBirth)}
+              {isNaN(dateOfBirth.getTime())
+                ? "Unknown Zodiac"
+                : getZodiacSign(dateOfBirth)}
             </h3>
           </div>
         </div>
@@ -47,8 +60,8 @@ export default function Description({ talent }: DescriptionProps) {
           <h2>Location</h2>
           <Image src={Pointer} alt="Pointer" width={5} height={5} />
           <h3 className="text-[#D9D9D9] font-[500]">
-            {talent.location?.city || "Unknown City"}, 
-            {talent.location?.province || "Unknown Province"}, 
+            {talent.location?.city || "Unknown City"},
+            {talent.location?.province || "Unknown Province"},
             {talent.location?.country || "Unknown Country"}
           </h3>
         </div>
@@ -72,7 +85,8 @@ export default function Description({ talent }: DescriptionProps) {
         <div className="flex flex-col space-y-2">
           <h3 className="text-[14px] text-[#B3B3B2]">Interested:</h3>
           <div className="flex items-center space-x-4">
-            {Array.isArray(talent.interested) && talent.interested.length > 0 ? (
+            {Array.isArray(talent.interested) &&
+            talent.interested.length > 0 ? (
               talent.interested.map((interest, index) => (
                 <button
                   key={index}
@@ -91,7 +105,8 @@ export default function Description({ talent }: DescriptionProps) {
         <div className="flex flex-col space-y-2">
           <h3 className="text-[14px] text-[#B3B3B2]">Love Language:</h3>
           <div className="flex items-center space-x-4">
-            {Array.isArray(talent.love_language) && talent.love_language.length > 0 ? (
+            {Array.isArray(talent.love_language) &&
+            talent.love_language.length > 0 ? (
               talent.love_language.map((language, index) => (
                 <button
                   key={index}

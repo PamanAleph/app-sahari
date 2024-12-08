@@ -17,7 +17,7 @@ export default function Account({ talent, onClick }: AccountProps) {
       onClick={onClick}
     >
       <Image
-        src={talent.photo_profile || DefaultAccount}
+        src={`/${talent.photo_profile}` || DefaultAccount}
         alt={talent.talent_name}
         width={40}
         height={40}
