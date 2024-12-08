@@ -13,7 +13,7 @@ FROM base AS deps
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --frozen-lockfile
 
 # 3. Build Layer
 FROM base AS builder
@@ -41,9 +41,11 @@ RUN adduser -S nextjs -u 1001
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Run the application as a non-root user
+# Use non-root user for security
 USER nextjs
 
+# Expose the app port
 EXPOSE 3000
 
+# Use CMD in JSON format to avoid signal handling issues
 CMD ["node", "server.js"]
